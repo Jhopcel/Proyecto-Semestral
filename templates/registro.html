@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+
+{% block head %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% endblock %}  
+
+{% block content %}
+<center>
+    <div class="container">
+        <div class="class="account_form" data-aos="fade-up" data-aos-delay="0"">
+            <form method="POST" class="col-sm-12 col-md-6">
+                <div class="form-group">
+                {% csrf_token %}
+                <div class="form-group clearfix">
+                    <label for="id_username" class="letra-piola" >Nombre de usuario: </label>
+                    <input name="username" type="text" autofocus required id="id_usuarname" class="form-control">
+                </div>
+                <div class="form-group clearfix">
+                    <label for="id_first_name" class="letra-piola" >Nombre: </label>
+                    <input name="first_name" type="text" id="id_first_name" class="form-control">
+                </div>
+                <div class="form-group clearfix">
+                    <label for="id_last_name" class="letra-piola" >apellidos: </label>
+                    <input name="last_name" type="text" id="id_last_name" class="form-control">
+                </div>
+                <div class="form-group clearfix">
+                    <label for="id_rut" class="letra-piola" >Rut: </label>
+                    <input name="rut" type="text" required id="id_rut" class="form-control">
+                </div>
+                <div class="form-group clearfix">
+                    <label for="id_direccion" class="letra-piola" >Dirección: </label>
+                    <input name="direccion" type="text" required id="id_direccion" class="form-control">
+                </div>
+                <div class="form-group clearfix">
+                    <label for="id_password1" class="letra-piola" >Contraseña: </label>
+                    <input name="password1" type="password" autocomplete="new-password" required id="id_password1" class="form-control">
+                </div>
+                <div class="form-group clearfix">
+                    <label for="id_password2" class="letra-piola" >Repetir Contraseña: </label>
+                    <input name="password2" type="password" autocomplete="new-password" required id="id_password2" class="form-control">
+                </div>
+                </div>
+                <br>
+                <div class="btn_guardar">
+                    <button class="btn btn-md btn-black-default-hover mb-4" type="submit">Guardar</button>
+                </div>
+                {% if mesg %}
+                    <div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</center>
+{% endblock %}
+
+
+{% block extra %}
+<style>
+    .letra-piola{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+</style>
+{% endblock %}
