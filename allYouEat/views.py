@@ -45,3 +45,7 @@ def registro(request):
             return redirect(login_succes) 
     form = RegistrarUsuarioForm()
     return render(request, "registro.html", context={'form': form})
+
+def orden_de_compra(request):
+    
+    return render(request, "orden_de_compra.html", {})

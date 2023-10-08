@@ -26,4 +26,5 @@ urlpatterns = [
     path('login/', views.login_succes, name="login"),
     path('logout/', views.logout_succes, name='logout'),
     path('registro/', views.registro, name='registro'),
+    path('orden_de_compra/', views.orden_de_compra, name='orden_de_compra'),
 ]
