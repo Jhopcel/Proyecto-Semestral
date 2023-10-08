@@ -1,8 +1,40 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from bodega.models import Productos
 
 # Create your views here.
 
 
-def cart(request):
+def mantenedor(request):
+    productosListados = Productos.objects.all()
+    return render(request, "Productos.html", {"productos": productosListados})
+
+def registrarproducto(request):
+    codigo = request.POST['txtCodigo']
+    nombre = request.POST['txtNombre']
+    precio = request.POST['intPrecio']
+
+    producto=Productos.objects.create(codigo=codigo, nombre=nombre, precio=precio)
+    return redirect('/')
+
+def eliminarProducto(request, codigo):
+    producto = Productos.objects.get(codigo=codigo)
+    producto.delete()
+    return redirect('/')
+
+def edicionProducto(request, codigo):
+    producto = Productos.objects.get(codigo=codigo)
+    return render(request, "edicionProducto.html", {"producto": producto})
+
+
+def editarProducto(request):
     
-    return render(request, "cart.html", {})
+    codigo = request.POST['txtCodigo']
+    nombre = request.POST['txtNombre']
+    precio = request.POST['intPrecio']
+    
+    producto = Productos.objects.get(codigo=codigo)
+    producto.nombre = nombre
+    producto.precio = precio
+    producto.save()
+
+    return redirect('/')

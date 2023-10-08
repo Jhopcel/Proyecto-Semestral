@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from bodega.forms import LoginForm, RegistrarUsuarioForm    
 from django.contrib.auth import login, logout, authenticate
 from bodega.models import PerfilUsuario
+
+# linea para el mantenedor
+from django.urls import path
+from bodega import views
 # Create your views here.
 
 
@@ -45,3 +49,11 @@ def registro(request):
             return redirect(login_succes) 
     form = RegistrarUsuarioForm()
     return render(request, "registro.html", context={'form': form})
+
+# conexion a mantenedor
+urlpatterns = [
+
+    path('Productos.html', views.mantenedor),
+    path('editarProducto/', views.editarProducto)
+    
+]

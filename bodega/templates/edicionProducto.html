@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+{% block title %} Editor de productos  {% endblock %}
+ 
+{% block body %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Edición de productos</h2>
+        <div class="card">
+        <div class="card-body">
+
+            <!-- formulario para guardar productos -->
+            <form action="{% url 'editarProducto'%}" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="txtCodigo" value="{{producto.codigo}}"   id="txtCodigo" class="form-control" placeholder="Código" minlength="1" maxlength="3" readonly required >
+                </div>
+                <div class="form-group">
+                    <input type="text" name="txtNombre" value="{{producto.nombre}}" id="txtNombre" class="form-control" placeholder="Nombre"  maxlength="50" required >
+                </div>
+                <div class="form-group">
+                    <input type="number" name="intPrecio" value="{{producto.precio}}" id="intPrecio" class="form-control" placeholder="Precio"  required >
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

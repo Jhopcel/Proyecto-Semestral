@@ -19,11 +19,12 @@ from django.urls import path, include
 from . import views
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('bodega/', include('bodega.urls')),
     path('login/', views.login_succes, name="login"),
     path('logout/', views.logout_succes, name='logout'),
-    path('registro/', views.registro, name='registro'),
+    
 ]
