@@ -9,9 +9,11 @@
             <li class="nav-item ">
                 <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home"></i> Inicio</a>
             </li>
+            {% if user.is_authenticated and user.is_staff %}
             <li class="nav-item ">
                 <a class="nav-link" href="{% url 'orden_de_compra' %}"><i class="fas fa-home"></i> Orden de Compra</a>
             </li>
+            {% endif %}
             {% if user.is_authenticated and user.is_staff %}
             <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fas fa-cogs"></i>Bodega</a>
