@@ -12,8 +12,9 @@ def registrarproducto(request):
     codigo = request.POST['txtCodigo']
     nombre = request.POST['txtNombre']
     precio = request.POST['intPrecio']
-
-    producto=Productos.objects.create(codigo=codigo, nombre=nombre, precio=precio)
+    imagen = request.FILES['imgProducto']
+    
+    producto = Productos.objects.create(codigo=codigo, nombre=nombre, precio=precio, imagen = imagen)
     return redirect('/')
 
 def eliminarProducto(request, codigo):
@@ -31,10 +32,12 @@ def editarProducto(request):
     codigo = request.POST['txtCodigo']
     nombre = request.POST['txtNombre']
     precio = request.POST['intPrecio']
+    imagen = request.FILES['imgProducto']
     
     producto = Productos.objects.get(codigo=codigo)
     producto.nombre = nombre
     producto.precio = precio
+    producto.imagen = imagen
     producto.save()
 
     return redirect('/')

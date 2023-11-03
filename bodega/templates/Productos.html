@@ -2,61 +2,68 @@
 
 {% block title %} Mantenedor de productos {% endblock %}
  
-{% block body %}
+{% block content %}
 
-
-    <div class="row">
+    <div class="container py-5">
+        <div class="row">
         
-        <div class="col-sm-9 col-md-3 col-lg-2 col-xl-2">
-            <h2>Mantenedor de Productos</h2>
-         <div class="card">  
-            <div class="card-body">
-
-            <!-- formulario para guardar productos -->
-            <form action="{% url 'registrarproducto' %}" method="post">{% csrf_token %}
-                <div class="form-group">
-                    <input type="text" name="txtCodigo" id="txtCodigo" class="form-control" placeholder="Código" minlength="1" maxlength="3" required >
-                </div>
-                <div class="form-group">
-                    <input type="text" name="txtNombre" id="txtNombre" class="form-control" placeholder="Nombre"  maxlength="50" required >
-                </div>
-                <div class="form-group">
-                    <input type="number" name="intPrecio" id="intPrecio" class="form-control" placeholder="Precio"  required >
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
-                </div>
-                
-            </form>
+            <div class="col-sm-9 col-md-3 col-lg-2 col-xl-2">
+                <h2>Mantenedor de Productos</h2>
+             <div class="card">  
+                <div class="card-body">
+    
+                <!-- formulario para guardar productos -->
+                <form action="{% url 'registrarproducto' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="txtCodigo" id="txtCodigo" class="form-control" placeholder="Código" minlength="1" maxlength="3" required >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="txtNombre" id="txtNombre" class="form-control" placeholder="Nombre"  maxlength="50" required >
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="intPrecio" id="intPrecio" class="form-control" placeholder="Precio"  required >
+                    </div class="form-group">
+                        <input type="file" name="imgProducto" id="imgProducto" class="form-control" >
+                    <div>
+    
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                    
+                </form>
+            </div>
         </div>
-    </div>
-   <!-- final de formulario -->
-
-        </div>
-        <div class="col-sm-3 col-md-7 col-lg-8 col-xl-9">
-            <div class="table-responsive py-1">
-              <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for p in productos %}
-                    <tr>
-                        <td>{{p.codigo}}</td>
-                        <td>{{p.nombre}}</td>
-                        <td>{{p.precio}}</td>
-                        <td><a href="edicionProducto/{{p.codigo}}" class="btn btn-info">Editar</a></td>
-                        <td><a href="eliminarProducto/{{p.codigo}}" class="btn btn-danger">Eliminar</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-              </table>  
+       <!-- final de formulario -->
+    
+            </div>
+            <div class="col-sm-3 col-md-7 col-lg-8 col-xl-9">
+                <div class="table-responsive py-1">
+                  <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in productos %}
+                        <tr>
+                            <td>{{p.codigo}}</td>
+                            <td>{{p.nombre}}</td>
+                            <td>{{p.precio}}</td>
+                            <td><a href="edicionProducto/{{p.codigo}}" class="btn btn-info">Editar</a></td>
+                            <td><a href="eliminarProducto/{{p.codigo}}" class="btn btn-danger">Eliminar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>  
+                </div>
             </div>
         </div>
     </div>
+
 
     {% endblock %}

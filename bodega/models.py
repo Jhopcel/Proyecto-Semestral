@@ -14,8 +14,15 @@ class Productos (models.Model):
     codigo = models.CharField(primary_key= True, max_length=6)
     nombre = models.CharField(max_length=50)  
     precio = models.IntegerField(int)  
-#     Imagen = models.ImageField(upload_to='C:\Projectos_DJANGO\Proyecto-semestral\allYouEat\static\img')
+    imagen = models.ImageField(upload_to='images/', default="sinfoto.jpg")
 
     def __str__(self):
         texto = "{0} ({1})"
         return texto.format (self.nombre, self.precio)
+
+class Factura(models.Model):
+    codigo_factura = models.AutoField(primary_key=True)
+    usuario = models.ForeignKey(PerfilUsuario, on_delete=models.CASCADE)
+    nombre_producto = models.CharField(max_length=90, null=True)
+    precio_producto = models.IntegerField()
+    fecha_factura = models.DateTimeField(auto_now=True)

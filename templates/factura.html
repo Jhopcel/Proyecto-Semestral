@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <center><h2 class="titulo">Mi Factura</h2></center>
+    <div class="producto-singular">
+        <!-- Productos aquí -->
+        {% for fa in factura %}
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Usuario
+                    </th>
+                    <th>
+                        Codigo
+                    </th>
+                    <th>
+                        Nombre Producto
+                    </th>
+                    <th>
+                        Precio
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{ fa.usuario.user }}
+                    </td>
+                    <td>
+                        {{ fa.codigo_factura }}
+                    </td>
+                    <td>
+                        {{ fa.nombre_producto }}
+                    </td>
+                    <td>
+                        {{ fa.precio_producto }}
+                    </td>
+                    <td>
+                        {{ fa.fecha_factura }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+    </div>
+</div>
+<style>
+    th,  td{
+        border: 3px solid black;
+        width: 200px;
+        text-align: center;
+    }
+    th{
+        height: 100px;
+        font-size: 20px;
+    }
+    td{
+        height: 300px;
+        font-size: 25px;
+    }
+    .producto-singular{
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+.titulo{
+    margin-top: 180px;
+    font-size: 70px;
+}
+</style>
+
+{% endblock %}

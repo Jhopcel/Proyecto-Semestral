@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from bodega.forms import LoginForm, RegistrarUsuarioForm    
 from django.contrib.auth import login, logout, authenticate
-from bodega.models import PerfilUsuario
+from bodega.models import PerfilUsuario, Productos, Factura
+from django.contrib import messages
 
 # linea para el mantenedor
 from django.urls import path
@@ -10,9 +11,44 @@ from bodega import views
 
 
 def index(request):
-    
-    return render(request, "index.html", {})
+    productos = Productos.objects.all()
+    return render(request, "index.html", {'productos': productos})
 
+def producto(request, id):
+    producto = Productos.objects.filter(codigo=id)
+
+    producto_valores = Productos.objects.get(codigo=id)
+    
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            if not request.user.is_staff:
+                user = request.user
+                perfil = PerfilUsuario.objects.get(user=user)
+                usuario = perfil
+                nombre_producto = producto_valores.nombre
+                precio_producto = producto_valores.precio     
+                factura = Factura.objects.create(usuario=usuario, nombre_producto=nombre_producto, precio_producto=precio_producto)
+                
+                messages.success(request, "Se puedo comprar exitosamente")
+                return redirect("factura", id=factura.pk)
+            else:
+                messages.error(request, "Un administrador no puede comprar")
+        else:
+            messages.error(request, "Tienes que tener una cuenta para poder comprar")
+    return render(request, "producto.html", {'productos': producto})
+
+def perfil_usuario(request):
+    
+    usuario = request.user
+    
+    perfil = PerfilUsuario.objects.get(user=usuario)
+    facturas = Factura.objects.filter(usuario=perfil)
+    
+    return render(request, "perfil_usuario.html", {'perfil':perfil, 'facturas': facturas})
+
+def factura(request, id):
+    factura = Factura.objects.filter(codigo_factura = id)
+    return render(request, "factura.html", {'factura': factura})
 
 def login_succes(request):
     data = {"mesg": "", "form": LoginForm()}

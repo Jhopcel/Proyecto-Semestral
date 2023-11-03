@@ -22,12 +22,6 @@
     <div>
         {% block content %} {% endblock %}
     </div>
-    <div class="container py-5">
-        {% block body %}
-
-        {% endblock %}
-    </div>
-
     <footer>
         {% include 'footer/footer.html' %}  
     </footer>
@@ -35,6 +29,27 @@
     {% block scripts %} {% endblock %}
 
     {% block extra %} {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if messages %}
+    {% for m in messages %}
+      <script>
+        if ("{{m.tags}}" == "error")
+          Swal.fire({
+            "title": "Error",
+            "text" : "{{m}}",
+            "icon": "error",
+        })
+        else if ("{{m.tags}}" == "success")
+          Swal.fire({
+              "title": "Felicitaciones",
+              "text" : "{{m}}",
+              "icon": "success",
+          })
+      </script>
+    {% endfor %}
+  {% endif %}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" 
     integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" 

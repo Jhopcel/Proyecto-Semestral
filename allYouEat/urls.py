@@ -17,15 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
+    path('producto/<id>', views.producto, name="producto"),
+    path('factura/<id>', views.factura, name="factura"),
+    path('perfil', views.perfil_usuario, name="perfil_usuario"),
     path('bodega/', include('bodega.urls')),
     path('login/', views.login_succes, name="login"),
     path('logout/', views.logout_succes, name='logout'),
     path('registro/', views.registro, name='registro'),
     path('orden_de_compra/', views.orden_de_compra, name='orden_de_compra'),
-]
+    
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
