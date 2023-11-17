@@ -7,12 +7,18 @@
     <br>
     <div class="products">
         <!-- Productos aquí -->
+        {% for pr in productos %}
         <div class="product">
-            <img src="producto1.jpg" alt="Producto 1">
-            <h3>Producto 1</h3>
-            <p>Precio: $20.00</p>
+            <a href="{% url 'producto' pr.codigo %}">
+                <img src="/media/{{ pr.imagen }}" alt="Producto 1">
+            </a>
+            
+            <h3>{{ pr.nombre }}</h3>
+            <p>Precio: {{ pr.precio }}</p>
         </div>
-        <div class="product">
+        {% endfor %}
+
+        <!-- <div class="product">
             <img src="producto2.jpg" alt="Producto 2">
             <h3>Producto 2</h3>
             <p>Precio: $25.00</p>
@@ -36,7 +42,7 @@
             <img src="producto3.jpg" alt="Producto 3">
             <h3>Producto 3</h3>
             <p>Precio: $30.00</p>
-        </div>
+        </div> -->
         <!-- Agrega más productos aquí -->
     </div>
 </div>

@@ -1,0 +1,85 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-producto-singular">
+    <center><h2 class="titulo">AAL YOU EAT</h2></center>
+    <div class="producto-singular">
+        <!-- Productos aquí -->
+        {% for pr in productos %}
+        <div class="imagen-producto-singular">
+            <img src="/media/{{ pr.imagen }}" alt="Producto 1">
+        </div>
+        <div class="precio-nombre-producto-singular">
+            <h3>{{ pr.nombre }}</h3>
+            <p>Precio: ${{ pr.precio }}</p>
+            <form class="form" action="#" method="POST">
+                {% csrf_token %}
+                <button>Comprar</button>
+                <label class="label-form" for="monto_compra">
+                    Monto a comprar:
+                </label>
+                <input class="input-form" type="number" name="monto_compra" id="monto_compra">
+            </form>
+            
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<style>
+    .producto-singular{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    .imagen-producto-singular{
+        width: 600px;
+        height: 600px;
+    }
+    .imagen-producto-singular img{
+        width: 100%;
+        height: 100%;
+    }
+    .precio-nombre-producto-singular {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .precio-nombre-producto-singular h3, p{
+        font-size: 50px;
+    }
+    .precio-nombre-producto-singular button{
+        width: 190px;
+        height: 40px;
+        border: 0;
+        border-radius: 9px;
+        background-color: #c76a27;
+
+    }
+    .precio-nombre-producto-singular button:hover{
+        cursor: pointer;
+        background-color: rgb(252, 195, 9);
+        color: white;
+    }
+    .titulo{
+        margin-top: 170px;
+        margin-bottom: 20px;
+    }
+    .form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .label-form{
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+    .input-form{
+        border-radius: 5px;
+        border: 2px solid #c76a27 ;
+    }
+</style>
+
+{% endblock %}
