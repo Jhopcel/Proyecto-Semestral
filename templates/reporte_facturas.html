@@ -7,34 +7,53 @@
     <p>Mostrando facturas desde {{ fecha_inicio }} hasta {{ fecha_fin }}</p>
 
     {% if facturas %}
-        <div class="col-sm-3 col-md-7 col-lg-8 col-xl-9">
-            <div class="table-responsive py-1">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Producto</th>
-                            <th>Codigo</th>
-                            <th>Cantidad</th>
-                            <th>Precio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for f in facturas %}
+            <div class="col-sm-3 col-md-7 col-lg-8 col-xl-9">
+                <div class="table-responsive py-1">
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <td>{{ f.fecha_factura }}</td>
-                                <td>{{ f.nombre_producto }}</td>
-                                <td>{{ f.codigo_factura }}</td>
-                                <td>{{ f.monto_producto }}</td>
-                                <td>{{ f.precio_producto }}</td>
+                                <th>Fecha</th>
+                                <th>Producto</th>
+                                <th>Codigo</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {% for f in facturas %}
+                                <tr>
+                                    <td>{{ f.fecha_factura }}</td>
+                                    <td>{{ f.nombre_producto }}</td>
+                                    <td>{{ f.codigo_factura }}</td>
+                                    <td>{{ f.monto_producto }}</td>
+                                    <td>{{ f.precio_producto }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    {% else %}
-        <p>No hay facturas en el rango de fechas seleccionado.</p>
+        {% else %}
+            <div class="error-container py-5" ><p>NO HAY FACTURAS EN EL RANGO DE FECHAS SELECCIONADO.</p></div>
+            
+    {% endif %}
 
-        {% endif %}
+<style>
+
+.error-container {
+   
+    background-color: chocolate;
+    text-overflow: ellipsis;
+    
+    /* Estilos para centrar y ajustar el texto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;  /* Puedes ajustar el tamaño del texto según tus necesidades */
+    text-align: center; /* Alinea el texto en el centro horizontalmente */
+    white-space: nowrap; /* Evita el salto de línea del texto */
+}
+
+</style>
+
 {% endblock %}
