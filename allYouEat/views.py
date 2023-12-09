@@ -102,6 +102,22 @@ def registro(request):
     return render(request, "registro.html", context={'form': form})
 
 
+
+# def reporte_facturas(request):
+#     if request.method == 'POST':
+#         fecha_inicio = request.POST.get('fecha_inicio')
+#         fecha_fin = request.POST.get('fecha_fin')
+
+#         facturas = Factura.objects.filter(fecha__range=[fecha_inicio, fecha_fin])
+
+#         # Puedes procesar los datos de ventas como desees y pasarlos al contexto
+#         context = {'facturas': facturas, 'fecha_inicio': fecha_inicio, 'fecha_fin': fecha_fin}
+#         return render(request, 'reporte_facturas.html', context)
+
+#     return render(request, 'formulario_fechas.html')
+
+
+
 # conexion a mantenedor
 urlpatterns = [
 
