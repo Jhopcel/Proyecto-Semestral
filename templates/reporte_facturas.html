@@ -3,9 +3,12 @@
 
 {% block content %}
 
-    <h2>Reporte de Facturas</h2>
-    <p>Mostrando facturas desde {{ fecha_inicio }} hasta {{ fecha_fin }}</p>
-
+    <div class="container py-1">
+        <h1>Reporte de Facturas</h1>
+    </div>
+        <div class="container">
+            <p>Mostrando facturas desde {{ fecha_inicio }} hasta {{ fecha_fin }}</p>
+        </div>
     {% if facturas %}
             <div class="col-sm-3 col-md-7 col-lg-8 col-xl-9">
                 <div class="table-responsive py-1">
