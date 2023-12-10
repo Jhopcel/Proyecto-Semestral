@@ -1,0 +1,101 @@
+{% extends 'base/base.html' %}
+{% block title %} Reporte de facturas {% endblock %}
+
+{% block content %}
+
+    <div class="container py-1">
+        <h1>Reporte de Facturas</h1>
+    </div>
+    <div class="container">
+        <p>Mostrando facturas desde {{ fecha_inicio }} hasta {{ fecha_fin }}</p>
+    </div>
+    {% if facturas %}
+        <div class="col-sm-3 col-md-7 col-lg-8 col-xl-9">
+            <div class="table-responsive py-1">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Producto</th>
+                            <th>Codigo</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for f in facturas %}
+                            <tr>
+                                <td>{{ f.fecha_factura }}</td>
+                                <td>{{ f.nombre_producto }}</td>
+                                <td>{{ f.codigo_factura }}</td>
+                                <td>{{ f.monto_producto }}</td>
+                                <td>{{ f.precio_producto }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Agrega el botón de descarga utilizando JavaScript -->
+        <div class="container mt-3">
+            <button onclick="descargarExcel()" class="btn btn-primary">Descargar Excel</button>
+        </div>
+    {% else %}
+        <div class="error-container py-5">
+            <p>NO HAY FACTURAS EN EL RANGO DE FECHAS SELECCIONADO.</p>
+        </div>
+    {% endif %}
+
+    <style>
+        .error-container {
+            background-color: chocolate;
+            text-overflow: ellipsis;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            text-align: center;
+            white-space: nowrap;
+        }
+    </style>
+
+    <script>
+        function descargarExcel() {
+            // Crea un objeto Blob con los datos del archivo Excel
+            var blob = new Blob([s2ab(excelData())], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+
+            // Crea un enlace de descarga
+            var link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "reporte_facturas.xlsx";
+
+            // Agrega el enlace al documento y haz clic en él
+            document.body.appendChild(link);
+            link.click();
+
+            // Limpia el enlace después de descargar
+            document.body.removeChild(link);
+        }
+
+        // Convierte la cadena a una matriz de bytes
+        function s2ab(s) {
+            var buf = new ArrayBuffer(s.length);
+            var view = new Uint8Array(buf);
+            for (var i = 0; i !== s.length; ++i) {
+                view[i] = s.charCodeAt(i) & 0xFF;
+            }
+            return buf;
+        }
+
+        // Función para obtener los datos del Excel (puedes adaptar esto según tus necesidades)
+        function excelData() {
+            var data = "Fecha\tProducto\tCodigo\tCantidad\tPrecio\n";
+            {% for f in facturas %}
+                data += "{{ f.fecha_factura }}\t{{ f.nombre_producto }}\t{{ f.codigo_factura }}\t{{ f.monto_producto }}\t{{ f.precio_producto }}\n";
+            {% endfor %}
+            return data;
+        }
+    </script>
+
+{% endblock %}

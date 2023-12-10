@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+{% block title %} Editor de productos  {% endblock %}
+ 
+{% block content %}
+    <div class="container py-5">
+        <form method="post" action="{% url 'detalle_reporte' %}">
+            {% csrf_token %}
+            <div class="col-sm-3 col-md-7 ">
+            <label for="fecha_inicio">Fecha de Inicio:</label>
+            <input type="date" name="fecha_inicio" required>
+            <label for="fecha_fin">Fecha de Fin:</label>
+            <input type="date" name="fecha_fin" required>
+            <div class="col-md-7"><button type="submit" style="width: max-content; height: 30px; background-color: chartreuse;">
+                Generar Reporte</button>
+            </div>
+        </div>
+        </form>
+    </div>
+{% endblock %}
